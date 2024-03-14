@@ -11,8 +11,13 @@ credentials_json = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
 if credentials_json is None:
     raise ValueError("La variable de entorno GOOGLE_APPLICATION_CREDENTIALS no está definida")
 
+
+# Escribe el contenido del JSON en un archivo
+with open('credentials.json', 'w') as f:
+    f.write(credentials_json)
+
 # Crea el cliente de almacenamiento utilizando las credenciales
-storage_client = storage.Client.from_service_account_json(credentials_json)
+storage_client = storage.Client.from_service_account_json('credentials.json')
 bucket_name = 'yelp-gmaps-data'
 
 @app.route('/')
